@@ -5,7 +5,7 @@ namespace Otus.Domain.UserCards;
 
 public class UserCard
 {
-    public long Id { get; set; }
+    public long UserCardId { get; set; }
     public long UserId { get; set; }
     public string Email { get; set; }
     public string Name { get; set; }

@@ -12,6 +12,8 @@ builder.Services.AddAutoMapper(configure =>
         new ResponsesMappingProfile()
     });
 });
+
+builder.Services.AddNpgsql(builder.Configuration);
 builder.Services.AddDataAccess();
 builder.Services.AddLogic();
 builder.Services.AddControllers();
