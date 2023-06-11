@@ -9,6 +9,7 @@ builder.Services.AddAutoMapper(configure =>
     configure.AddProfiles(new Profile[]
     {
         new PostgresMappingProfile(),
+        new RequestsMappingProfile(),
         new ResponsesMappingProfile()
     });
 });

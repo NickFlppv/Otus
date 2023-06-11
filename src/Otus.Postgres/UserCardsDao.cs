@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Logging;
-using Otus.Core.Models;
 using Otus.DataAccess;
 using Otus.Postgres.Connections;
 using Otus.Postgres.Dapper;
@@ -12,16 +11,22 @@ public class UserCardsDao : DapperWrapper, IUserCardsDao<UserCardDto>
     public UserCardsDao(IMainConnectionString connectionString, ILogger logger) : base(connectionString, logger)
     {
     }
-    
-    public async Task<IEnumerable<UserCardDto>> GetUserCards(PaginationInfo pagination)
+
+    public async Task<long> AddUserCard(UserCardDto userCard)
     {
-        return new[]
-        {
-            new UserCardDto
+        var sql = "Insert into usercards (\"userId\", name, surname, birthday, \"genderId\", city, biography) " +
+                  "Values(@UserId, @Name, @Surname, @Birthday, @GenderId, @City, @Biography) RETURNING \"userCardId\";";
+
+        return await Mutate<long>(sql,
+            new
             {
-                Name = "Nikolay",
-                Surname = "Ivanov"
-            }
-        };
+                userCard.UserId,
+                userCard.Name,
+                userCard.Surname,
+                userCard.Birthday,
+                userCard.GenderId,
+                userCard.City,
+                userCard.Biography
+            });
     }
 }
