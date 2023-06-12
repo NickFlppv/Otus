@@ -9,6 +9,7 @@ using Otus.Service.Logic.Users;
 namespace Otus.Service.Controllers;
 
 [ApiController]
+[Authorize]
 [Route("api/[controller]")]
 public class UsersController : ControllerBase
 {

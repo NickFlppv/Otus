@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Otus.Contracts.Requests;
 using Otus.Service.Logic.Auth;
 
 namespace Otus.Service.Controllers;
@@ -17,9 +18,9 @@ public class AuthController : ControllerBase
     
     [AllowAnonymous]
     [HttpPost]
-    public async Task<IActionResult> Login(int id, string password)
+    public async Task<IActionResult> Login([FromBody]LoginRequest loginRequest)
     {
-        var identity = await _authLogic.GetIdentity(id, password);
+        var identity = await _authLogic.GetIdentity(loginRequest.UserId, loginRequest.Password);
         if (identity == null)
             return BadRequest(new { errorText = "Invalid username or password." });
 

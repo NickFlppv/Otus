@@ -5,5 +5,5 @@ namespace Otus.Service.Logic.Auth;
 public interface IAuthLogic
 {
     string CreateToken(ClaimsIdentity identity);
-    Task<ClaimsIdentity?> GetIdentity(int userId, string password);
+    Task<ClaimsIdentity?> GetIdentity(long userId, string password);
 }

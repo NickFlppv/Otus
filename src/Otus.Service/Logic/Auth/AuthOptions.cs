@@ -5,8 +5,8 @@ namespace Otus.Service.Logic.Auth;
 
 public class AuthOptions
 {
-    public const string ISSUER = "OtusService";
-    public const string AUDIENCE = "OtusServiceClient";
+    public const string ISSUER = "otus.service";
+    public const string AUDIENCE = "otus.service.client";
     const string KEY = "mysupersecret_secretkey!123";
     public const int LIFETIME = 999;
 

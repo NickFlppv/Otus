@@ -39,7 +39,7 @@ public class AuthLogic : IAuthLogic
         return new JwtSecurityTokenHandler().WriteToken(jwt);
     }
 
-    public async Task<ClaimsIdentity?> GetIdentity(int userId, string password)
+    public async Task<ClaimsIdentity?> GetIdentity(long userId, string password)
     {
         var userDto = await _usersDao.GetUserById(userId);
         var user = _mapper.Map<UserDto?, User>(userDto);
@@ -56,6 +56,7 @@ public class AuthLogic : IAuthLogic
         var claimsIdentity =
             new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
                 ClaimsIdentity.DefaultRoleClaimType);
+        
         return claimsIdentity;
     }
 }
