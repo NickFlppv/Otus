@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Otus.DataAccess;
 using Otus.Domain.UserCards;
 using Otus.Domain.Users;
@@ -10,16 +11,19 @@ public class UsersLogic : IUsersLogic
 {
     private readonly IUsersDao<UserDto> _usersDao;
     private readonly IUserCardsDao<UserCardDto> _userCardsDao;
+    private readonly IPasswordHasher<User> _passwordHasher;
     private readonly IMapper _mapper;
 
     public UsersLogic(
         IUsersDao<UserDto> usersDao, 
         IUserCardsDao<UserCardDto> userCardsDao,
+        IPasswordHasher<User> passwordHasher,
         IMapper mapper
         )
     {
         _usersDao = usersDao;
         _userCardsDao = userCardsDao;
+        _passwordHasher = passwordHasher;
         _mapper = mapper;
     }
     
@@ -39,6 +43,9 @@ public class UsersLogic : IUsersLogic
 
     public async Task<long> Register(User user)
     {
+        var hashedPassword = _passwordHasher.HashPassword(user, user.Password);
+        user.Password = hashedPassword;
+        
         var userDto = _mapper.Map<User, UserDto>(user);
 
         var userId = await _usersDao.AddUser(userDto);

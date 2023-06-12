@@ -11,7 +11,10 @@ public class RequestsMappingProfile : Profile
 {
     public RequestsMappingProfile()
     {
-        CreateMap<UserRequest, User>();
+        CreateMap<GenderRequest, Gender>();
         CreateMap<UserCardRequest, UserCard>();
+        CreateMap<UserRequest, User>()
+            .ForMember(u => u.UserCard, 
+            config => config.MapFrom(e => e.UserCard));
     }
 }

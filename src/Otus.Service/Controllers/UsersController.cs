@@ -21,7 +21,6 @@ public class UsersController : ControllerBase
         _mapper = mapper;
     }
 
-    [Authorize]
     [HttpGet("{userId}")]
     public async Task<IActionResult> GetUser(long userId)
     {

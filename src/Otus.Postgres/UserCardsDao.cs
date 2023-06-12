@@ -24,7 +24,7 @@ public class UserCardsDao : DapperWrapper, IUserCardsDao<UserCardDto>
                 userCard.Name,
                 userCard.Surname,
                 userCard.Birthday,
-                userCard.GenderId,
+                userCard.Gender?.GenderId,
                 userCard.City,
                 userCard.Biography
             });
