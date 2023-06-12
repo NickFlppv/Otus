@@ -9,9 +9,9 @@ namespace Otus.Postgres.Dapper;
 public abstract class DapperWrapper
 {
     protected readonly IConnectionString _connectionString;
-    private readonly ILogger _logger;
+    private readonly ILogger<DapperWrapper> _logger;
 
-    protected DapperWrapper(IConnectionString connectionString, ILogger logger)
+    protected DapperWrapper(IConnectionString connectionString, ILogger<DapperWrapper> logger)
     {
         _connectionString = connectionString;
         _logger = logger;

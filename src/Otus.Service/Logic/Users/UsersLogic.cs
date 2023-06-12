@@ -45,9 +45,10 @@ public class UsersLogic : IUsersLogic
     {
         var hashedPassword = _passwordHasher.HashPassword(user, user.Password);
         user.Password = hashedPassword;
+        user.RegisteredAt = DateTime.UtcNow;
         
         var userDto = _mapper.Map<User, UserDto>(user);
-
+        
         var userId = await _usersDao.AddUser(userDto);
 
         if (user.UserCard is not null)

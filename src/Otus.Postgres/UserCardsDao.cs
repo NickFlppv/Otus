@@ -8,7 +8,7 @@ namespace Otus.Postgres;
 
 public class UserCardsDao : DapperWrapper, IUserCardsDao<UserCardDto>
 {
-    public UserCardsDao(IMainConnectionString connectionString, ILogger logger) : base(connectionString, logger)
+    public UserCardsDao(IMainConnectionString connectionString, ILogger<DapperWrapper> logger) : base(connectionString, logger)
     {
     }
 

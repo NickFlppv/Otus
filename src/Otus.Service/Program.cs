@@ -35,6 +35,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+builder.Services.AddLogging();
+builder.Services.AddPasswordHasher();
 builder.Services.AddNpgsql(builder.Configuration);
 builder.Services.AddDataAccess();
 builder.Services.AddLogic();
@@ -55,7 +57,10 @@ app.UseHttpsRedirection();
 
 app.UseRouting();
 
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
+
 app.MapHealthChecks("/health");
 
 app.Run();
