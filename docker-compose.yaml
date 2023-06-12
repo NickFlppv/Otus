@@ -1,0 +1,32 @@
+networks:
+  otus-service:
+    driver: bridge
+services:
+  app:
+    container_name: otus-service
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 5000:5000
+    networks:
+      - otus-service
+    depends_on:
+      - otus-main-db
+  otus-main-db:
+    container_name: OtusMainDb
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgresUser
+      POSTGRES_PASSWORD: postgresPassword
+      POSTGRES_DB: OtusMainDb
+    ports:
+      - "5432:5432"
+    networks:
+      - otus-service
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+volumes:
+  postgres-data:
