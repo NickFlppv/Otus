@@ -5,6 +5,7 @@ using Otus.Postgres;
 using Otus.Postgres.Connections;
 using Otus.Postgres.Dtos;
 using Otus.Service.Logic.Auth;
+using Otus.Service.Logic.UserCards;
 using Otus.Service.Logic.Users;
 
 namespace Otus.Service.Infrastructure;
@@ -14,6 +15,7 @@ public static class ServiceCollectionExtensions
     public static void AddLogic(this IServiceCollection services)
     {
         services.AddTransient<IUsersLogic, UsersLogic>();
+        services.AddTransient<IUserCardsLogic, UserCardsLogic>();
         services.AddTransient<IAuthLogic, AuthLogic>();
     }
 
